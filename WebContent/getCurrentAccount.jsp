@@ -2,12 +2,15 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Close Account</title>
+<title>Get Current Account Balance</title>
 </head>
 <body>
-	<form action="deleteAccount.mm">
+	<form action="checkCurrentAccount.mm">
 		Enter Account Number: <input type="text" name="accountNumber" maxlength="14" /> <br /> <br />
 		<input type="submit" value="submit">
-	</form>
+	</form><br />
+	<div>
+		<jsp:include page="HomeLink.html"></jsp:include>
+	</div>
 </body>
 </html>

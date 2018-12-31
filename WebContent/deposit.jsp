@@ -2,13 +2,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Get Current Account Balance</title>
+<title>Deposit</title>
 </head>
 <body>
-	<form action="checkCurrentAccount.mm">
+	<form action="depositAmount.mm">
 		Enter Account Number: <input type="text" name="accountNumber" maxlength="14" /> <br /> <br />
+		Enter Amount: <input type="text" name="amount" /> <br /> <br />
 		<input type="submit" value="submit">
-	</form>
-
+	</form><br />
+	<div>
+		<jsp:include page="HomeLink.html"></jsp:include>
+	</div>
 </body>
 </html>
