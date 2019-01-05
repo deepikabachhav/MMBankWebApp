@@ -33,6 +33,8 @@ import com.moneymoney.exception.AccountNotFoundException;
 public class AccountController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	SavingsAccountService savingsAccountService=new SavingsAccountServiceImpl();
+	private SavingsAccount savingsAccount;
+	private SavingsAccount account;
 	private RequestDispatcher dispatcher;
 	boolean salary;
 	int result= 0;
@@ -296,11 +298,30 @@ public class AccountController extends HttpServlet {
 			int accountNumberToUpdate=Integer.parseInt(request.getParameter("accountNumber"));
 			try {
 				SavingsAccount savingsAccount = savingsAccountService.getAccountById(accountNumberToUpdate);
-				response.sendRedirect("createNewAccount.mm");
+				request.setAttribute("account", savingsAccount);
+				dispatcher = request.getRequestDispatcher("UpdateDetails.jsp");
+				dispatcher.forward(request, response);
 			} catch (ClassNotFoundException | SQLException | AccountNotFoundException e) {
 				e.printStackTrace();
 			}
 			break;
+		case "/updateAccountDB.mm":
+			String accountHolderNameToUpdate = request.getParameter("name");
+			salary = request.getParameter("salary").equalsIgnoreCase(
+					"salaryTrue") ? true : false;
+			System.out.println(salary);
+
+			try {
+				account.getBankAccount().setAccountHolderName(accountHolderNameToUpdate);
+				account.setSalary(salary);
+				SavingsAccount savingsAccount = savingsAccountService.updateAccount(account);
+				request.setAttribute("account", savingsAccount);
+				dispatcher = request.getRequestDispatcher("AccountDetails.jsp");
+				dispatcher.forward(request, response);
+			} catch (ClassNotFoundException | SQLException
+					| AccountNotFoundException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 	
